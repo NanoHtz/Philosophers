@@ -1,5 +1,5 @@
 <!-- ===================== BANNER ===================== -->
-![Philosophers banner](https://raw.githubusercontent.com/<tu-usuario>/assets/v1/banners/philosophers/banner.png)
+![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/assets/philosophers/banner.svg)
 
 
 <p align="center">
