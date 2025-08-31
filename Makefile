@@ -6,7 +6,7 @@
 #    By: fgalvez- <fgalvez-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 14:04:17 by fgalvez-          #+#    #+#              #
-#    Updated: 2025/08/31 11:42:05 by fgalvez-         ###   ########.fr        #
+#    Updated: 2025/08/31 12:09:04 by fgalvez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,11 @@
 
 NAME         = philo
 CC           = cc
-CFLAGS       = -Wall -Wextra -Werror -g -O0
+CFLAGS       = -Wall -Wextra -Werror -g -O0 -pthread
 
 LIBS_FLAGS   = -L$(DIR_LIBFT) -lft
 
 RM           = rm -f
-NORMINETTE   = norminette
-VALGRING     = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
-VALGRING_OUT = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind_output
-
 # ========================= DIRECTORIOS Y ARCHIVOS =========================== #
 
 DIR_HEADERS = Inc/Inc/libft
@@ -70,7 +66,7 @@ $(NAME): $(OBJS)
 	@echo "${CYAN}=================================================================================================================${RESET}"
 	@echo "${GREEN}                                       [✔] $(NAME) successfully compiled.${RESET}                               "
 	@echo "${CYAN}=================================================================================================================${RESET}"
-	@echo "${MAGENTA}You should use: valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind_output ./$(NAME) ${RESET}"
+	@echo "${MAGENTA}You should use: valgrind --leak-check=full --show-leak-kinds=all -s --track-origins=yes --run-libc-freeres=yes --fair-sched=try ./$(NAME) ${RESET}"
 
 # ========================= REGLAS PARA LOS OBJETOS ========================== #
 $(OBJSDIR)%.o: $(DIRSOURCE)%.c
