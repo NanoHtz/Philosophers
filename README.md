@@ -1,5 +1,7 @@
 <!-- ===================== BANNER ===================== -->
-![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/Assets/main/philosophers/banner.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NanoHtz/Assets/main/philosophers/banner.svg" alt="Philosophers banner">
+</p>
 
 <p align="center"><i>🧠 Philosophers (42 Cursus) — Solución al clásico "Dining Philosophers Problem" con threads y mutexes, evitando deadlocks race conditions y starvation.</i></p>
 
