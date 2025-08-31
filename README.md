@@ -35,16 +35,16 @@ Philosophers simula a N filósofos sentados alrededor de una mesa. Cada filósof
 <details>
   <summary><h3>📝 Explicación</h3></summary>
 
-En este proyecto nos centramos en los hilos.
-<br>
-Un hilo es la ejecucion minima dentro de un proceso, los hilos dentro de un proyecto, comparten recursos, memoria, descriptores de archivo etc...
-<br>
-En contra partida permiten hacer varias cosas a la vez, trabajar en paralelo sobre un mismo proceso, sirven de proteccion, si un hilo fuese muy lento, no se quedaria el trabajo paralizado, otros seguirian trabajando.
-<br>
-Habrá que manejar race conditions, es decir situaciones donde los hilos manejas la misma memoria, por ejemplo, dos hilos imprimiendo en el mismo archivo, los resultados son impredecibles, memoria basura... etc
-<br>
-Para evitarlo usamos los mutex.
-<br>
+<b>🧵 Hilos</b><br>
+• Un hilo es la ejecución mínima dentro de un proceso.<br>
+• Comparte con otros hilos del mismo proceso: memoria, descriptores de archivo y recursos comunes.<br>
+• Permite hacer varias cosas a la vez (concurrencia y posible paralelismo); si un hilo se bloquea, los demás pueden seguir.<br><br>
+
+<b>⚠️ Race conditions</b><br>
+• Ocurren cuando varios hilos acceden/modifican el mismo dato sin coordinación.<br>
+• Ejemplo: dos hilos imprimiendo o escribiendo a la vez en el mismo buffer/archivo.<br>
+• Efecto: resultados impredecibles (salida mezclada, datos corruptos).<br><br>
+
 🔒 Un mutex (mutual exclusion) es un cerrojo que garantiza que solo un hilo a la vez entra en una “sección crítica”
 Sin mutexes, dos hilos podrían modificar/imprimir/leer el mismo recurso a la vez → race conditions.
 <br>
