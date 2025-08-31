@@ -1,5 +1,5 @@
 <!-- ===================== BANNER ===================== -->
-![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/assets/main/philosophers/banner.svg)
+![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/Assets/main/philosophers/banner.svg)
 
 <p align="center"><i>🧠 Philosophers (42 Cursus) — Solución al clásico "Dining Philosophers Problem" con threads y mutexes, evitando deadlocks race conditions y starvation.</i></p>
 
@@ -34,6 +34,8 @@ Philosophers simula a N filósofos sentados alrededor de una mesa. Cada filósof
   <summary><h3>📝 Explicación</h3></summary>
 
 En este proyecto nos centramos en los hilos.
+Un hilo es la ejecucion minima dentro de un proceso, los hilos dentro de un proyecto, comparten recursos, memoria, descriptores de archivo etc...
+En contra partida permiten hacer varias cosas a la vez, trabajar en paralelo sobre un mismo proceso, sirven de proteccion, si un hilo fuese muy lento, no se quedaria el trabajo paralizado, otros seguirian trabajando.
 
   <!-- Pon aquí tu explicación técnica: 
        - Modelo de hilos: un hilo por filósofo + 1 monitor (si usas monitor).
