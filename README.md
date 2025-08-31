@@ -1,4 +1,7 @@
 <!-- ===================== BANNER ===================== -->
+![Philosophers banner](https://raw.githubusercontent.com/<tu-usuario>/assets/v1/banners/philosophers/banner.png)
+
+
 <p align="center">
   <img src="assets/banner.svg" alt="Banner de TODO_TITULO" width="100%" />
 </p>
