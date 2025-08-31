@@ -1,10 +1,5 @@
 <!-- ===================== BANNER ===================== -->
-![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/assets/philosophers/banner.svg)
-
-
-<p align="center">
-  <img src="assets/banner.svg" alt="Banner de TODO_TITULO" width="100%" />
-</p>
+![Philosophers banner](https://raw.githubusercontent.com/NanoHtz/assets/main/philosophers/banner.svg)
 
 <p align="center"><i>🧠 Philosophers (42 Cursus) — Solución al clásico "Dining Philosophers Problem" con threads y mutexes, evitando deadlocks race conditions y starvation.</i></p>
 
@@ -37,6 +32,8 @@ Philosophers simula a N filósofos sentados alrededor de una mesa. Cada filósof
 <a id="explicacion"></a>
 <details>
   <summary><h3>📝 Explicación</h3></summary>
+
+En este proyecto nos centramos en los hilos.
 
   <!-- Pon aquí tu explicación técnica: 
        - Modelo de hilos: un hilo por filósofo + 1 monitor (si usas monitor).
