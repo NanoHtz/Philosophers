@@ -48,6 +48,51 @@ Para evitarlo usamos los mutex.
 🔒 Un mutex (mutual exclusion) es un cerrojo que garantiza que solo un hilo a la vez entra en una “sección crítica”
 Sin mutexes, dos hilos podrían modificar/imprimir/leer el mismo recurso a la vez → race conditions.
 <br>
+Los usamos para:
+<br>
+• <b>Tenedores</b> (uno por sitio): comer implica bloquear 2 forks.<br>
+• <b>Impresión</b>: un print_mutex evita mezclar líneas en la salida.<br>
+• <b>Conrol</b>: desde el control observamos los valores en cada momento, tambien se ha de mutear sin se quiere "solo" observar, puesto que en ese mismo momento su valor puede estar cambiando por otro hilo.
+<br><br>
+
+<b>🍴 Mapeo del problema</b><br>
+• <b>Filósofo</b> → cada filosofo es un hilo con el ciclo: pensar → tomar tenedores → comer → soltar → dormir.<br>
+• <b>Tenedor</b> → un mutex.<br>
+• <b>Mesa</b> → estructura compartida con forks, tiempos, start_time y mutexes.
+<br><br>
+
+<b>🛑 Deadlock (interbloqueo) y cómo evitarlo</b><br>
+Si todos cogen el mismo lado primero, pueden quedarse todos esperando el segundo tenedor.<br>
+Solución simple: <b>orden par/impar</b> (rompe el ciclo de espera).<br>
+• Filósofos pares: primero derecho, luego izquierdo.<br>
+• Filósofos impares: primero izquierdo, luego derecho.
+<br><br>
+
+<b>🥣 Starvation (inanición)</b><br>
+Intentamos que nadie se quede sin comer indefinidamente. Con el orden par/impar y tiempos razonables, no debería ocurrir en el <i>mandatory</i>.<br>
+Usamos un pequeño tiempo de arranque, para que todos empiecen en el mismo momento y sincronizarlos.
+<br><br>
+Para dormir con precisión, se usa un <i>sleep</i> en bucle con pausas cortas (p. ej. usleep en pasos pequeños).
+<br><br>
+
+<b>🩺 Monitor</b><br>
+Un hilo de control vigila periódicamente a todos:<br>
+• Si <code>ahora - last_meal > time_to_die</code> → activa <code>stop</code> e imprime una única línea "<b>died</b>".<br>
+• Si existe <code>must_eat</code> y todos llegaron a su cuota → <code>stop</code> sin muertes.
+<br><br>
+
+<b>🧊 Casos borde</b><br>
+• <b>N = 1</b>: solo puede coger un tenedor → nunca come → muere tras <code>time_to_die</code>.<br>
+• La línea "<b>died</b>" debe ser la <b>última</b> de la salida y aparecer una sola vez.
+<br><br>
+
+<b>🧭 Flujo general</b><br>
+1) Validar argumentos.<br>
+2) Inicializar mesa (forks, mutexes, tiempos).<br>
+3) Crear filósofos (hilos) y esperar al <code>start_time</code>.<br>
+4) Cada hilo ejecuta su ciclo; el monitor vigila.<br>
+5) Al terminar: <i>join</i> de hilos, <i>destroy</i> de mutexes y <i>free</i> de memoria.
+<br><br>
 
 </details>
 
