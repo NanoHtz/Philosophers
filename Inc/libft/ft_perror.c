@@ -12,22 +12,16 @@
 
 #include "libft.h"
 
-static void	ft_strendl(const char *str)
+int	ft_perror(const char *str, int code)
 {
-	int	i;
+	const char	*prefix = "Error: ";
+	const char	nl = '\n';
 
-	i = 0;
-	while (str[i] != '\0')
+	if (str)
 	{
-		write(2, &str[i], 1);
-		i++;
+		write(2, prefix, 7);
+		write(2, str, ft_strlen(str));
+		write(2, &nl, 1);
 	}
-	write(2, "\n", 1);
-}
-
-int	ft_perror(char *str, int n)
-{
-	write(2, "Error: ", 7);
-	ft_strendl(str);
-	return (n);
+	return (code);
 }

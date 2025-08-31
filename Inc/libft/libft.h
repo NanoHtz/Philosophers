@@ -22,8 +22,9 @@
 int		ft_isdigit(int x);
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
-int		ft_perror(char *str, int n);
+int		ft_perror(const char *str, int code);
 void	ft_putstr(char *str);
 int		is_number(char *av);
+size_t	ft_strlen(const char *str);
 
 #endif

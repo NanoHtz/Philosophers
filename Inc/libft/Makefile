@@ -32,7 +32,8 @@ SRCS         = ft_isdigit.c \
 				ft_perror.c \
 				ft_atol.c \
 				ft_putstr.c \
-				ft_isnumber.c
+				ft_isnumber.c \
+				ft_strlen.c
 
 SRCS         := $(addprefix $(DIR_SRC)/,$(SRCS))
 

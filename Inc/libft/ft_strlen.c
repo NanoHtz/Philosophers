@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgalvez- <fgalvez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fgalvez- <fgalvez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:15:22 by fgalvez-          #+#    #+#             */
-/*   Updated: 2024/12/05 14:58:44 by fgalvez-         ###   ########.fr       */
+/*   Created: 2024/01/15 17:48:05 by fgalvez-          #+#    #+#             */
+/*   Updated: 2024/01/15 17:48:05 by fgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <errno.h>
-# include <string.h>
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-# define MANY_ARGS "too many arguments"
-
-void	ft_strendl(const char *str);
-int		ft_perror(int n);
-int		ft_error_args(int n);
-
-#endif
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
