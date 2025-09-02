@@ -12,6 +12,13 @@
 
 #include "../Inc/philosophers.h"
 
+/*
+	| Orden de forks cuando N es par.
+	| Pares: left luego right.
+	| Impares: right luego left.
+	| Rompe simetrías para evitar deadlock.
+	| f1 y f2 salen listos para lock.
+*/
 void	set_even_order(t_philosopher *p, int *f1, int *f2)
 {
 	if (p->id % 2 == 0)
@@ -26,6 +33,12 @@ void	set_even_order(t_philosopher *p, int *f1, int *f2)
 	}
 }
 
+/*
+	| Orden de forks cuando N es impar.
+	| Toma primero el de menor índice.
+	| Impone orden global (jerarquía de recursos).
+	| Evita espera circular y deadlock.
+*/
 static void	set_odd_order(t_philosopher *p, int *f1, int *f2)
 {
 	if (p->left_fork < p->right_fork)
@@ -40,6 +53,11 @@ static void	set_odd_order(t_philosopher *p, int *f1, int *f2)
 	}
 }
 
+/*
+	| Elige la estrategia según paridad de N.
+	| N par: alterno por id (set_even_order).
+	| N impar: orden total por índice (set_odd_order).
+*/
 static void	set_fork_order(t_philosopher *p, int *f1, int *f2)
 {
 	if ((p->table->num_philosophers % 2) == 0)
@@ -74,6 +92,14 @@ static int	acquire_both_forks(t_philosopher *p, int f1, int f2)
 	return (0);
 }
 
+/*
+	| Intenta tomar f1 y f2 con backoff.
+	| Lock de f1 con lock_fork (valida vida).
+	| f2 con trylock; si falla, suelta f1 y reintenta.
+	| Tras tomar f2, revalida vida y loguea.
+	| Backoff usleep(800) para bajar contención.
+	| Devuelve 1 si tiene ambos; 0 si no.
+*/
 void	take_forks(t_philosopher *philo)
 {
 	int		f1;

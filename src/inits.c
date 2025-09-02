@@ -12,6 +12,24 @@
 
 #include "../Inc/philosophers.h"
 
+/*
+	| Reserva e inicializa la estructura t_table.
+	| Carga reglas desde av: N, t_die, t_eat, t_sleep.
+	| Si ac==6, must_eat=av[5]; si no, must_eat=-1.
+	| Reserva array de mutex para forks (N entradas).
+	| Cada fork es un mutex: exclusión en tenedor.
+	| Inicializa cada fork con pthread_mutex_init.
+	| Crea mutex de impresión: print_mutex.
+	| Crea mutex de estado de muerte: died_mutex.
+	| start_time=0: se fijará luego para sincronizar.
+	| died=0: bandera global, se protege con died_mutex.
+	| Ownership: table libera forks y destruye mutex.
+	| Si malloc de forks falla: free(table) y NULL.
+	| Nota: no se comprueban errores al crear mutex.
+	| Para robustez, maneja fallos parciales y cleanup.
+	| Gancho: died_mutex permite un monitor de muerte.
+	| Devuelve puntero listo o NULL si hubo error.
+*/
 t_table	*init_table(int ac, char **av)
 {
 	t_table	*table;
@@ -41,6 +59,21 @@ t_table	*init_table(int ac, char **av)
 	return (table);
 }
 
+/*
+	| Inicializa el array de t_philosopher.
+	| Tamaño: num_philosophers de la mesa.
+	| Asigna id, forks, contador y punteros compartidos.
+	| Forks: left=i, right=(i+1)%N (índices circulares).
+	| last_meal = start_time para arrancar sincronizado.
+	| meal_mutex protege last_meal y meals_eaten.
+	| thread_id=0 hasta pthread_create lo rellene.
+	| Conceptos:
+	| - Índices mod N modelan la mesa circular.
+	| - Mutex por filósofo evita carreras en stats.
+	| - El orden de forks no evita deadlock por sí solo.
+	|   Se resuelve en la rutina (p.ej. orden alterno).
+	| Devuelve puntero o NULL si malloc falla.
+*/
 t_philosopher	*init_philosophers(t_table *table)
 {
 	t_philosopher	*philos;
@@ -65,6 +98,12 @@ t_philosopher	*init_philosophers(t_table *table)
 	return (philos);
 }
 
+/*
+	| Libera recursos por-filósofo y su mutex.
+	| Destruye meal_mutex[i] antes de liberar el array.
+	| Concepto: destruir mutex evita fugas de kernel.
+	| Seguro si philos==NULL no se llama a esta función.
+*/
 void	free_philo(t_table *table, t_philosopher *philos)
 {
 	int	i;
@@ -75,6 +114,15 @@ void	free_philo(t_table *table, t_philosopher *philos)
 	free(philos);
 }
 
+/*
+	| Libera la mesa y sus mutex compartidos.
+	| Destruye todos los forks antes del free.
+	| Destruye el mutex de impresión (print_mutex).
+	| Luego libera el array forks y la propia table.
+	| Mejora: también destruir died_mutex aquí.
+	|   (falta pthread_mutex_destroy(&table->died_mutex);)
+	| Ownership: la mesa es dueña de forks y mutex.
+*/
 void	free_table(t_table *table)
 {
 	int	i;
