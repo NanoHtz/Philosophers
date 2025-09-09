@@ -12,25 +12,11 @@
 
 #include "../Inc/philosophers.h"
 
-/*
-	| Libera el mutex del fork indicado.
-	| Helper pequeño para centralizar unlock.
-	| Supone que el fork estaba bloqueado por philo.
-*/
 void	unlock_fork(t_philosopher *philo, int fork_index)
 {
 	pthread_mutex_unlock(&philo->table->forks[fork_index]);
 }
 
-/*
-	| Toma un fork si la simulación sigue viva.
-	| Early-exit: si get_died()==0, no bloquea.
-	| Tras lock revalida vida; si murió, suelta y sale.
-	| Imprime "has taken a fork" si tuvo éxito.
-	| Doble check evita prints tras el fin.
-	| Devuelve 1 si tomó el fork; 0 si no.
-	| El orden de forks lo decide la rutina externa.
-*/
 int	lock_fork(t_philosopher *philo, int fork_index)
 {
 	if (!get_died(philo->table))
@@ -45,13 +31,6 @@ int	lock_fork(t_philosopher *philo, int fork_index)
 	return (1);
 }
 
-/*
-	| Suelta los forks del filósofo con orden estable.
-	| Caso N==1: solo suelta el izquierdo y retorna.
-	| Par: left luego right. Impar: right luego left.
-	| Orden simétrico por id para consistencia.
-	| Gancho: aquí puedes variar la estrategia.
-*/
 void	unlock_forks(t_philosopher *philo)
 {
 	if (philo->table->num_philosophers == 1)

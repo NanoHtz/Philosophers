@@ -12,14 +12,6 @@
 
 #include "../Inc/philosophers.h"
 
-/*
-	| Gestiona el caso de un único filósofo (N==1).
-	| Toma su tenedor izquierdo y espera t_die.
-	| No puede comer: nunca tendrá dos tenedores.
-	| Bucle: espera suave con usleep(100).
-	| Al expirar t_die: imprime "died" y marca fin.
-	| Concepto: caso trivial, sin bloqueo global.
-*/
 void	*one_philo(t_philosopher *philo, t_table *t)
 {
 	long	start;
@@ -33,12 +25,6 @@ void	*one_philo(t_philosopher *philo, t_table *t)
 	return (NULL);
 }
 
-/*
-	| Desfase en mesas impares para ids pares.
-	| Retrasa ~t_eat/2 si N es impar e id es par.
-	| Reduce colisiones de forks al iniciar ciclos.
-	| Comprueba vida; sale si la sim termina.
-*/
 void	stagger_if_odd(t_philosopher *philo)
 {
 	t_table	*t;
@@ -53,12 +39,6 @@ void	stagger_if_odd(t_philosopher *philo)
 	}
 }
 
-/*
-	| Desfase inicial cuando N es par.
-	| Solo para ids impares y primera comida.
-	| Retrasa ~t_eat/2 para repartir forks.
-	| Evita competir todos a la vez al inicio.
-*/
 void	stagger_even_first_turn(t_philosopher *philo)
 {
 	t_table	*t;
@@ -75,11 +55,6 @@ void	stagger_even_first_turn(t_philosopher *philo)
 	}
 }
 
-/*
-	| Un ciclo: desfase, tomar forks, comer, soltar,
-	| y después dormir y pensar.
-	| Encapsula la secuencia para reuso y claridad.
-*/
 void	routine_loop(t_philosopher	*philo)
 {
 	stagger_even_first_turn(philo);
@@ -90,19 +65,6 @@ void	routine_loop(t_philosopher	*philo)
 	sleep_and_think(philo);
 }
 
-/*
-	| Hilo del filósofo: lógica principal.
-	| Espera barrera: start_time y sim aún viva.
-	| Bucle mientras viva:
-	|  - Revisa objetivo de comidas bajo meal_mutex.
-	|  - Si llegó a must_eat, sale del bucle.
-	|  - Si N==1, resuelve con one_philo y termina.
-	|  - Si no, ejecuta routine_loop.
-	| Conceptos:
-	|  - Barrera temporal de arranque sincroniza hilos.
-	|  - Lecturas atómicas con mutex evitan carreras.
-	| Mejora: cond vars en lugar de esperas activas.
-*/
 void	*routine(void *arg)
 {
 	t_philosopher	*philo;

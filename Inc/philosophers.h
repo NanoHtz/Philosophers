@@ -23,8 +23,8 @@
 # define E_ARGS "wrong number of arguments. Only 4 or 5 arguments"
 # define E_SIGN "Only digits."
 # define E_RANGE "Out of range (1-INT_MAX)."
-# define E_PHILO "El primer argumento debe ser mayor de 1."
-# define E_EMPTY "La cadena esta vacía"
+# define E_PHILO "First argument must be > 1."
+# define E_EMPTY "The string is empty"
 
 typedef struct s_table
 {

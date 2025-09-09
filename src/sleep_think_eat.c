@@ -12,14 +12,6 @@
 
 #include "../Inc/philosophers.h"
 
-/*
-	| Gestiona dormir y pensar del filósofo.
-	| Si la sim vive, imprime "is sleeping".
-	| Espera t_sleep con pausas cortas (usleep(100)).
-	| Luego, si sigue viva, imprime "is thinking".
-	| get_died evita logs cuando la sim ya acabó.
-	| Gancho: cambiar a cond vars para menor CPU.
-*/
 void	sleep_and_think(t_philosopher *philo)
 {
 	long	start;
@@ -34,16 +26,6 @@ void	sleep_and_think(t_philosopher *philo)
 		print_action(philo, "is thinking");
 }
 
-/*
-	| Inicia comida: marca tiempo y actualiza estado.
-	| meal_mutex protege last_meal y meals_eaten.
-	| Solo si la sim vive incrementa meals_eaten.
-	| do_print decide el log fuera del mutex (menos lock).
-	| Nota: si muere tras unlock, el log ya se decidió.
-	| Espera t_eat con pausas cortas (usleep(100)).
-	| Concepto: doble check de vida al comer.
-	| Gancho: usar cond vars en lugar de sondeo.
-*/
 void	eat(t_philosopher *philo)
 {
 	t_table	*t;

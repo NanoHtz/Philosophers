@@ -1,36 +1,31 @@
 Flujo de trabajo de tu Philosophers (paso a paso y al detalle)
 
-A continuación te explico qué hace cada pieza y cómo se coordinan a nivel de hilos, mutexes, tiempos y condiciones de parada. Lo estructuro en una línea temporal con invariantes y casos especiales. (Todos los nombres y decisiones están alineados con tu código.)
+A continuación te explico qué hace cada pieza y cómo se coordinan a nivel de hilos, mutexes, tiempos y condiciones de parada. 
+Lo estructuro en una línea temporal con invariantes y casos especiales. (Todos los nombres y decisiones están alineados con tu código.)
 
-1) Arranque y configuración
+1 ---- Arranque y configuración
 
 main
 
 Valida argumentos con check_args (números > 0 y dentro de rango).
 
 Reserva e inicializa la mesa con init_table:
-
-Campos: num_philosophers, time_to_die, time_to_eat, time_to_sleep, must_eat (o -1 si no viene).
+	Campos: num_philosophers, time_to_die, time_to_eat, time_to_sleep, must_eat (o -1 si no viene).
 
 Mutexes compartidos:
-
-forks[i] (uno por tenedor).
-
-print_mutex (serializa la salida).
-
-died_mutex (protege la bandera global died).
-
-died = 0 y start_time = 0 por defecto.
+	forks[i] (uno por tenedor).
+	print_mutex (serializa la salida).
+	died_mutex (protege la bandera global died).
+	died = 0 y start_time = 0 por defecto.
 
 Sincroniza el inicio: fija table->start_time = get_time() + 100 ms (barrera de arranque).
 
 Crea filósofos con init_philosophers:
-
-Array philos[i] con: id, left_fork = i, right_fork = (i+1)%N, meals_eaten = 0, table, last_meal = start_time, meal_mutex por filósofo.
+	Array philos[i] con: id, left_fork = i, right_fork = (i+1)%N, meals_eaten = 0, table, last_meal = start_time, meal_mutex por filósofo.
 
 Ejecuta hilos con create_and_join.
 
-2) Creación de hilos y monitor
+2--- Creación de hilos y monitor
 
 create_and_join
 
@@ -49,7 +44,7 @@ Join a todos los hilos de filósofo al acabar la simulación.
 Barrera temporal de arranque:
 En cada hilo de filósofo, routine espera a que get_time() >= start_time y a que la simulación siga viva (get_died(table)), con bucle de usleep(100).
 
-3) Monitor de la simulación
+3--- Monitor de la simulación
 
 control_routine (hilo monitor, desacoplado con detach)
 
