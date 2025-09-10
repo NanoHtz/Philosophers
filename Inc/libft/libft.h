@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-# define E_EMPTY "La cadena esta vacía"
+# define E_EMPTY "The string is empty"
 
 int		ft_isdigit(int x);
 int		ft_atoi(const char *nptr);

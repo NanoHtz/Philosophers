@@ -24,7 +24,6 @@
 # define E_SIGN "Only digits."
 # define E_RANGE "Out of range (1-INT_MAX)."
 # define E_PHILO "First argument must be > 1."
-# define E_EMPTY "The string is empty"
 
 typedef struct s_table
 {
