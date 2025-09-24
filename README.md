@@ -4,8 +4,10 @@
 </p>
 
 <p align="center"><i>🧠 Philosophers (42 Cursus) — Solución al clásico "Dining Philosophers Problem" con threads y mutexes, evitando deadlocks race conditions y starvation.</i></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NanoHtz/Assets/main/100.png" alt="philo nota" height="120">
+</p>
 
----
 
 ## Índice
 - [Resumen](#resumen)
@@ -20,6 +22,15 @@
 ## ✅ Resumen del proyecto<br>
 
 Philosophers simula a N filósofos sentados alrededor de una mesa. Cada filósofo alterna entre pensar, comer y dormir. Para comer, necesita dos tenedores (izquierdo y derecho). Los tenedores son recursos compartidos, modelados con mutexes. El objetivo es que la simulación no entre en deadlock (todos esperando indefinidamente), evite starvation (nadie se queda sin comer indefinidamente), y mantenga la precisión de tiempos dada por los parámetros.
+
+> Este proyecto sigue la **Norma oficial de 42** para estilo en C (Norminette).
+> En todos los proyectos de 42, el uso de la gran mayoria de bibliotecas esta prohibido, siendo nuestro propio desarrollo libft el sustituto de las funciones básicas. 
+> - Código legible.  
+> - Funciones pequeñas (<25 líneas),
+> - 4 parámetros por función,
+> - Nombres claros en `snake_case` y en inglés.
+> - 1 responsabilidad por función.
+>  - Variables declaradas al inicio del bloque(maximo 4 por función). 
 
 <a id="para-que"></a>
 ## 🧩 ¿Para qué?
