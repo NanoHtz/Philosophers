@@ -43,7 +43,6 @@ Philosophers simula a N filósofos sentados alrededor de una mesa. Cada filósof
 ---
 
 <a id="explicacion"></a>
-<details>
   <summary><h3>📝 Explicación</h3></summary>
 
 <b>🧵 Hilos</b><br>
@@ -104,8 +103,6 @@ Un hilo de control vigila periódicamente a todos:<br>
 4) Cada hilo ejecuta su ciclo; el monitor vigila.<br>
 5) Al terminar: <i>join</i> de hilos, <i>destroy</i> de mutexes y <i>free</i> de memoria.
 <br><br>
-
-</details>
 
 ---
 
